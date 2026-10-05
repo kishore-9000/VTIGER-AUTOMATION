@@ -1,0 +1,386 @@
+Git Commands
+-------------
+
+i. To initialize the project i.e., to create a local repository (one time process)
+
+	git init
+
+ii. Git configuration (important for identifying authors)(one time process -- globally throughout that system)
+
+	git config --global user.name username
+	git config --global user.email usermail
+
+iii. Git configuration (important for identifying authors)(one time process -- locally for that directory)
+
+	git config user.name username
+	git config user.email usermail
+
+iv. Adding files to local repository
+
+	git add filename			(for specific file)
+	git add file1.txt file2.java		(it will add 2 files)(multiple files can be added)
+	git add .	  			(for adding all the unstaged/untracked files)
+	git add *.txt	  			(for adding all the files with .txt extension)
+	git add *.txt *.java    		(for adding all the txt file and java file)
+
+v. Commit operation i.e., act of saving changes to local repository or snapshot of project's file system (For every commit, git records author name and email id, timestamp, commit message)
+
+	git commit -m "commit message"		(commit should always have a commit message)
+
+	Every commit done has an unique(hash) commit id which is hexadecimal number of 40 characters (in short 7 unique characters which is the first 7 of 40 characters)
+	[master 82dd01b] commit
+ 	2 files changed, 3 insertions(+), 1 deletion(-)
+ 	create mode 100644 b.txt  (100644 -> Linux terminology)
+
+	git commit -am "commit message"		(add & commit operation simultaneously only for the files tracked by GIT)
+
+vi. Connecting remote repository (git repo) to local repo
+
+	git remote add origin GithubRepoUrl		(origin is just like a name which will act like a folder to store and carry the files to github, we can have any name)
+
+vii. Push operation
+
+	git push origin master		(pushing the project to master branch in GitHub, either it can be master or main)
+
+viii. To clone a project from git repository
+
+	git clone GitRepoUrl
+
+ix. To create a branch & to delete a branch
+
+	git branch branchname		(creating branch)
+
+	git branch -d branchName	(deletes the branch)
+
+x. To list all the branches which is present in a project in working directory (active one will be highlighted)
+
+	git branch		(in local repository)
+	git branch -r		(in remote repository)
+	git remote -a		(in local+remote repository)
+
+xi. To switch to a branch
+
+	git switch branchname
+	git checkout branchname
+
+xii. To push a branch from local repo to git repo
+
+	git push origin branchname
+
+xiii. To push files from one branch in local repo to another branch in remote repo (in remote repo the branch should exist)
+
+	git push origin localBranchName:repomteBranchName
+
+	git push origin sai:hari	(here "sai" is the branch present in local repo and "hari" is the branch present in remote repo)
+
+
+xiv. For merging a branch to master in local repository, first switch to master branch
+
+	git merge branchname
+
+xv. After cloning any project to local repository, again we have to do the configuration to perform commit and push operation from that system
+
+	git config user.name username
+	git config user.email usermail
+
+xvi. To get the branches too from the remote repository after cloning the project (just switch to that branch)
+
+	git switch branchname
+
+xvii. To perform Pull operation
+
+	git pull origin master		(sometimes it can be main in GitHub so in place of master we will use main)
+
+
+xviii. To pull files from a branch in remote repo to a branch in local repo (first switch to the branch in local repo)
+
+	git pull origin remoteBranchName:localBranchName
+
+	git pull origin ravi:ram	(here "ravi" is the branch present in remote repo and "ram" is the branch present in local repo)(files from "ravi" branch is pulled to "ram" branch)
+
+
+xix. To check the status of the file which is added to local repository from the working directory, status of staged, untracked and modified files
+
+	git status
+
+	git status -s  --> shows the status in short (?? shows untracked file, A shows newly added files to staging area, AM shows already added files which is modified, M shows modified)
+
+xx. To get the details of the commit (or commit history) with details (like commit id, etc)
+
+	git log
+	git log .
+
+xxi. With git log we have other options
+
+	git log filename.extension 		-->	gives commit history of the specified files and only display that commit info in which the specified file is involved
+	git log --oneline			-->	gives detail of commit history in one line  (commit id (7 characters) and commit message)
+	git log -n 2				-->	shows log limits the number of commits to display ( here the last 2 commits)
+	git log -2				-->	same as above
+	git log --max-count=1 --oneline		-->	gives details of 1 commit i.e., last commit in oneline format
+	git log --grep="pattern"		-->	shows details of the commit based on commit message as per the given pattern
+	git log --grep="added"			-->	shows all the commit which has "added" word in its commit message
+	git log --graph				-->	graphical representation (useful to view branches and merges)
+	git log --since="2024-12-24"		-->	shows commit history after this date
+	git log --after="2025-09-19"		-->	shows all commit after this date
+	git log --after=2025-09-19		-->	shows all commit after this date
+	git log --after="10 days ago"		-->	shows all the commit after 10 days ago
+	git log --after="3 hours ago"		-->	shows all the commit after 3 hours ago
+	git log --after="2 minutes ago"		-->	shows all the commit after 2 minutes ago
+	git log --until="2025-09-19"		-->	shows all commit before this date
+	git log --before=2025-09-19		-->	shows all commit before this date
+	git log --before="10 days ago"		-->	shows all the commit before 10 days ago
+	git log --before="3 hours ago"		-->	shows all the commit before 3 hours ago
+	git log --before="2 minutes ago"	-->	shows all the commit before 2 minutes ago
+	git log --author="authorname or email"	-->	shows all the commit sone by the author
+	git log --decorate			-->	displays extra info
+
+
+xxii. To view the remote connection (after remote connection is done) associated with the local repository
+
+	git remote -v
+
+xxiii. To remove remote connection i.e., to disconnect the GitHub repository from local repository (it is done if we want to connect to other remote repo)
+
+	git remote remove origin
+
+xxiv. Initially master will be connected to the latest commit and HEAD will be connected to the master (HEAD -> master)
+
+xxv. To check for configuration done in git
+
+	git config user.name 	--> it will show the user name
+	git config user.email 	--> it will show the user email
+	git config --list 	--> it will list out all the git configurations
+
+xxvi. To unset the user configuration
+
+	For Global
+	-----------
+	git config --global --unset user.name
+	git config --global --unset user.email
+
+	For Local
+	----------
+	git config --unset user.name
+	git config --unset user.email
+
+xxvii. To reset the commit i.e., pointing the HEAD to that commit for which id is passed, if done, the commit will be deleted until the commitID passed
+
+	git reset --hard commitId	(Deletes all changes in local repository, staging area and working directory, permanent delete but it can be sometimes retrieved using "git reflog" by fetching the commit ID and then again hard reset to that commitID)
+					(hard reset can permanently delete any uncommitted files)
+
+	git reset --hard 00ba021	(resetting based on commit id)
+	git reset --hard HEAD~1		(the new HEAD will point to the second last commit, and the last commit will be deleted)
+	git reset --hard HEAD~2		(the new HEAD will point to the third last commit, and the last 2 commits will be deleted)
+
+	git reset --mixed commitID	(Keeps changes in working directory, but unstages them i.e., deletes from local repository and staging area)
+
+	git reset commitID		(same as above --> mixed)
+
+	git reset --soft commitID	(Keeps changes staged i.e., deletes only from local repo but keeps changes in WD and SA. Useful if you want to redo the commit)
+
+xxviii. To get the difference in the content of the file
+
+	git diff filename			(get the difference in file content between working directory and staging area)
+
+	Example: git diff b.txt
+	diff --git a/b.txt b/b.txt		(a/b.txt -> source copy means staging area, b/b.txt -> destination copy means working directory)
+	index 4840d11..751324e 100644	
+	--- a/b.txt				(--- source copy missing some lines , here staging area)
+	+++ b/b.txt				(+++ means new line added in the destination area, here working directory)
+	@@ -1,2 +1,3 @@				(this talks about the lines from where it is counting and till which line it is considering)
+	 this is the first line in b.txt	(if any line pre-fixed with space means it is unchanged and 
+	 this is the second line
+	+this is the third line			(if any line prefixed with + means it is added in destination copy, here working directory)(if any line prefixed with - means it is removed in destination copy, here working directory)
+
+	git diff HEAD file1.txt			(compares last commit and working directory for this file as HEAD always points to the last commit)	
+	git diff --staged HEAD file1.txt	(compares last commit and staged copy for this file)
+	git diff --staged file1.txt		(same as above)
+	git diff commitID file1.txt		(compares working directory with a specific commit for the given file)
+	git diff --staged commitID file1.txt	(compares staging area and specific commit for file1.txt)
+	git diff commitID1 commitID2 file1.txt	(compares between two specified commits for the given file)(commitID1 -> source copy, commitID2 -> destination copy)
+	git diff HEAD HEAD~1 file1.txt		(compares between last commit -> HEAD and second last commit -> HEAD~1)
+	git diff master ATE			(compares content between 2 branches master & ATE, here ATE is a branch)
+	git diff origin/master master		(compares content between local repository and remote repository)(origin/master -> source copy, master -> destination copy) 
+
+	If we don't mention filename, it compares all files which has changes
+
+xxix. To remove files from different areas (only in working directory and staging area)(after any "git rm" command we have to perform commit operation to record the deletion in the repo)
+
+	git rm filename				(remove file from both staging area and working directory)
+	git rm file1.txt			(file1.txt will be removed from both WD and SA)
+	
+	*If we simply use git rm without any filename, it will throw an error showing as fatal, Which files should i remove?*
+
+	git rm .				(it will not remove all files, instead will show as error)
+	git rm -r				(it will remove all files)
+	git rm --cached filename		(the file will be removed only from the staging area but not from working directory)
+	rm filename				(Linux command -> the file will be removed only from working directory but not from staging area (if  staged))
+
+xxx. To discard changes in the working directory or unstage files from staging
+
+	git restore filename			(discard all edits in WD and matches with the previous commit only when the new changes are not committed)
+	git restore --staged filename		(removes the file from staging area but local changes in the WD remains)
+	git restore .				(discard all the changes done in the working directory for the tracked files)
+
+
+xxxi. To undo the changes done in any commit by reversing the last commit by creating a new commit with those changes without deleting any history. Git Revert command is used to remove changes from all 3 stages (work directory, staging area and local repository). We use this command after commit. Sometimes, we commit accidentally and later on we realize that we shouldn't have done that. For this we use Git revert. This operation will generate new commit ID with some meaningful message to ignore previous commit where mistake is there. But, here we can’t completely eliminate the commit where mistake is there. Because Git tracks each and every change.
+
+	git revert commitID		(it will delete the commit for the given ID from WD, SA and not do anything on the commit but it will create a new commit saying to ignore previous commit) (first it will delete the files from WD, SA and will open the vi editor where we will give a commit message for new commit after revert operation)
+
+
+xxxii. To delete the UNTRACKED FILES only
+
+	git clean -n		("-n" means dryrun, it will show the files which is untracked and will be deleted as a warning)
+
+	git clean -f		("-f" means forcefully, there is no warning, it will delete all the untracked files)
+
+
+xxxiii. To show last commit on the master branch or any commit
+
+	git show master				(Show me details (commit message + changes) of the latest commit on the master branch)
+	git show commitID			(Show me details (commit message + changes) of the commit for the commit ID)
+
+xxxiv. Difference between git checkout vs. git reset
+----------------------------------------------------
+	git checkout can be used to discard the unstaged changes in working directory.(such that any modified files which is not staged, the changes will be deleted from the working directory and will become same as staging area)
+	git reset can be used to discard staged changes from staging area.
+
+
+git rm --cached vs. git reset
+------------------------------
+	git rm --cached file1.txt  	--->  It will delete the file from the staging area
+	git reset file1.txt		--->  The file won't be deleted from staging area but reset to previous state (one step back)
+
+
+xxxv. To ignore any file from add and commit, add that file to ".gitignore" (make sure it is not tracked by git)
+-----------------------------------------------------------------------------------------------------------------
+	vi .gitignore	--> editor will open where we will add those file which we don't want to be tracked by git, suppose we don't want any ".txt" file to be tracked, we will add *.txt
+				If we want to ignore a specific file then we will add that filename.extension, but that file should be untracked file otherwise it will not be ignored
+
+
+xxxvi. STASH meaning "store (something) safely in a hidden or secret place"
+----------------------------------------------------------------------------
+Suppose we are working on a file which has been already tracked by Git and where we made some new changes but not done commit, in that situation if we want to work on different code in same file either through other branch or need to pull any update and we don't want to delete the changes done in the recent file, then we move those changes to "stash" such that whenever we want we can get back from the stash store by applying it. Think of it as "hide my unfinished work for now".
+
+	git stash					(whenever we perform this, a stash store is created where the untracked files are stored which can be applied to the file later)
+	git stash save "WIP: homepage redesign"		(we can give a name to the stash)
+	git stash list					(see list of stash)(stash@{0} means latest stash, number is given in the way like a stack)
+		Suppose we are doing 3 stashes
+		--------------------------------
+		stash@{0}	-->	third stash or latest stash
+		stash@{1}	-->	second stash or second last stash
+		stash@{2}	-->	first stash
+		Example of stash list
+		----------------------
+		stash@{0}: WIP on master: 123abc Fix layout bug
+		stash@{1}: WIP: homepage redesign
+
+	git stash apply					(To apply last stash to file such that the changes will come back to file)(high chances of git conflict is there)
+	git stash apply stash@{1}			(To apply a specific stash, stash number is given based on LIFO principle)(we have to add and commit after applying)
+	git stash pop					(To apply and remove the stash from the stash store)
+	git stash drop stash@{0}			(To delete the stash without applying)(here stash@{0} means the latest stash as number follows LIFO principle)
+	git stash clear					(Clear all stashes)
+	git stash -a					(Stashes everything (including ignored files))
+	
+	Example
+	--------
+	# Make some changes to a file
+	vim index.html
+
+	# Save the changes temporarily
+	git stash save "work in progress"
+
+	# Check status (clean)
+	git status
+
+	# Switch to another branch
+	git checkout develop
+
+	# Return later
+	git checkout master
+	git stash pop
+
+
+xxxvii. To give a tag name to a commit such that the commit can be accessed with the tag instead of the commit ID and also it is easy to remember the name instead of an ID
+	
+	git tag -a tagname -m "tag message" commitID
+
+	git tag -a test -m "this commit has test tag name" commitID	(here "test" is the tag name given to the commit on its ID with a tag message, if we don't give tag message then an editor will open and there we have to write the tag message)
+
+
+	After this if we use "git log --oneline"
+
+		88d2415 (HEAD -> master, tag: test) tag practice
+		1f096ab stash commit
+		da7f4c6 a.txt commit
+
+
+	Once tag name is given, the commit details can be seen using (similarly wherever we are using commitID we can use this tag name for that commit)
+	
+		git show tagname
+
+		git show test		(here "test" is the tag name for the commit)(there is an example below)
+
+			 git show test
+				tag test
+				Tagger: RajatBurnwal <rajatburnwal002@gmail.com>
+				Date:   Thu Oct 9 21:26:21 2025 +0530
+
+				this is message for the tag			(tag message)
+
+				commit 88d2415ee3c022023d88de5c55d905f9e10222d8 (HEAD -> master, tag: test)
+				Author: RajatBurnwal <rajatburnwal002@gmail.com>
+				Date:   Thu Oct 9 21:25:38 2025 +0530
+
+				    tag practice				(commit message)
+
+				diff --git a/a.txt b/a.txt
+				index 34bd04f..639bd26 100644
+				--- a/a.txt
+				+++ b/a.txt
+				@@ -1,4 +1,5 @@
+				 this is the first line in a.txt
+				 this is the second line in a.txt
+				 this is the third line in a.txt
+				-this is the forth line in a.txt
+				\ No newline at end of file
+				+this is the forth line in a.txt
+				+this is the fifth line in a.txt
+
+
+
+xxxviii. To check the tags present
+
+	git tag
+
+
+xxxix. To delete a tag (this will just delete the tag and not the commit) (means the reference
+
+	git tag -d tagname
+
+XL. To push files from any branch in local repo to any branch in remote repo
+
+	git push origin localBranch:remoteBranch
+
+	git push origin robin:master		(here "robin" is the branch in local repo and "master" is the branch name in remote repo)
+
+XLI. The best way to pull any update from GitHub is to go for "fetch" operation instead of "pull" operation because it does NOT touch your working directory (it gets fetched to local repository and not working directory) (git pull = git fetch + git merge)
+	So:
+		No merge conflicts suddenly appearing
+		No broken code
+		No overwritten changes
+
+		You can safely inspect everything first
+
+	git fetch
+
+	If we are using "fetch" operation, to check the changes
+
+	git diff origin/master (branch name)
+
+	After checking the difference we can track the changes so we can avoid git conflict. If everything is fine, to merge we can use "merge" operation or "rebase" operation
+
+	git merge origin/master		(here the changes will be merged and can be seen in working directory)
+
+
+https://github.com/RajatBurnwal/Basic-Git-Commands.git
